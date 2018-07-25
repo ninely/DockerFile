@@ -20,13 +20,6 @@ RUN pecl install redis-4.0.1 \
     && pecl install memcached-3.0.4 \
     #&& pecl install xhprof-0.9.4 \
     && docker-php-ext-enable redis xdebug memcached 
-    #&& echo "extension=memcached.so" > /usr/local/etc/php/conf.d/memcached.ini \
-    #&& echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
-    #&& echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20170718/xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini
-
-# Install PHP extensions
-#COPY xhprof-0.9.4.tgz /home/xhprof.tgz
-#RUN pecl install /home/xhprof.tgz && echo "extension=xhprof.so" > /usr/local/etc/php/conf.d/xhprof.ini
 
 # PHP config
 ADD php.ini    /usr/local/etc/php/php.ini
