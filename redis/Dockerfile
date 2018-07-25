@@ -1,3 +1,3 @@
-FROM redis:5.0
+FROM redis:5.0-rc
 
 EXPOSE 6379
