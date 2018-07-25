@@ -1,13 +1,18 @@
 version: "3"
 services:
-  nginx:
-    build: ./nginx
+  mysql:
+    build: ./mysql
     ports:
-      - "80:80"
-    links:
-      - "php"
+      - "3306:3306"
     volumes:
-      - /opt:/opt
+      - /mnt/hgfs/www/opt/data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  redis:
+    build: ./redis
+    ports:
+      - "6379:6379"
 
   php:
     build: ./php
@@ -17,18 +22,13 @@ services:
       - "mysql"
       - "redis"
     volumes:
-      - /opt:/opt
+      - /mnt/hgfs/www/opt:/opt
 
-  mysql:
-    build: ./mysql
+  nginx:
+    build: ./nginx
     ports:
-      - "3306:3306"
+      - "80:80"
+    links:
+      - "php"
     volumes:
-      - /opt/data/mysql:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-
-  redis:
-    build: ./redis
-    ports:
-      - "6379:6379"
+      - /mnt/hgfs/www/opt:/opt
