@@ -22,9 +22,13 @@ RUN pecl install redis-4.0.1 \
     && docker-php-ext-enable redis xdebug memcached
 
 COPY xhprof.tgz /home/xhprof.tgz
-RUN pecl install /home/xhprof.tgz \
-    && docker-php-ext-install pdo pdo_mysql
-    && docker-php-ext-enable xhprof
+RUN tar -zxvf /home/xhprof.tgz \
+    && cd xhprof/extension \
+    && phpize && ./configure && make && make install && make clean \
+    && docker-php-ext-enable xhprof \
+    && rm -r /home/xhprof*
+
+RUN docker-php-ext-install pdo pdo_mysql
 
 # PHP config
 ADD php.ini    /usr/local/etc/php/php.ini
