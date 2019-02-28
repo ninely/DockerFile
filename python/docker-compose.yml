@@ -1,0 +1,11 @@
+version: '3'
+services:
+    python:
+        build: .
+        image: app_python
+        ports:
+            - "8000:8000"
+        volumes: 
+            - /mnt/hgfs/www/opt:/opt
+        #privileged: true
+        #restart: always

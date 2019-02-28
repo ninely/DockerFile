@@ -1,0 +1,8 @@
+	# gawk profile, created Thu Feb 28 22:40:09 2019
+
+	# Rule(s)
+
+	{
+		print_r $3
+	}
+
